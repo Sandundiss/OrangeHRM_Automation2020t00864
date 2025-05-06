@@ -54,3 +54,22 @@ class LoginPage:
             return self.driver.find_element(By.XPATH, self.button_login_xpath).is_displayed()
         except:
             return False
+        
+
+    def is_login_page_displayed(self):
+        """Verifies if login page is displayed correctly"""
+        try:
+        # Check for all key elements on login page
+            username_field = self.wait.until(
+                EC.visibility_of_element_located((By.XPATH, self.textbox_username_xpath)))
+            password_field = self.wait.until(
+                EC.visibility_of_element_located((By.XPATH, self.textbox_password_xpath)))
+            login_button = self.wait.until(
+                EC.visibility_of_element_located((By.XPATH, self.button_login_xpath)))
+        
+            return (username_field.is_displayed() and 
+                password_field.is_displayed() and 
+                login_button.is_displayed())
+        except Exception as e:
+            print(f"Login page verification failed: {str(e)}")
+            return False
